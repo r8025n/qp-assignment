@@ -1,6 +1,6 @@
 'use strict' 
 
-// const authorizationMiddleware = require("")
+const jwtMiddleware = require("../middleware/jwtMiddleware");
 const employeeController = require('../controllers/employeeController');
 
 const express = require("express");
@@ -13,7 +13,11 @@ router.get(baseRoute + '/positions',
 )
 
 router.get(baseRoute + '/',
-    // middleware,
+    employeeController.employeeListByPosition
+)
+
+router.get(baseRoute + '/jwt-protected',
+    jwtMiddleware.verifyJWT,
     employeeController.employeeListByPosition
 )
 
