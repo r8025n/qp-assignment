@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 exports.verifyJWT = (req, res, next) => {
     try{
-        const authHeader = req.header.authorization;
+        const authHeader = req.headers['authorization'];
         const token = authHeader && authHeader.split(" ")[1];
 
         if(!token){
@@ -16,6 +16,7 @@ exports.verifyJWT = (req, res, next) => {
             req.jwt = jwtPayload;
             next();
         }catch(err){
+            console.log(err)
             return res.status(403).json({message: "Invalid token"})
         }
     }catch(err){
