@@ -13,6 +13,7 @@ exports.getPositions = async () => {
 exports.getListByPosition = async (positionId) => {
     try{
         let response = [];
+        positionId = Number(positionId)
 
         for(let item of employees){
             if(item.positionId == positionId){

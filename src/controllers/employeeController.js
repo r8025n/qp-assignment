@@ -8,8 +8,8 @@ exports.getPositions = async(req, res) => {
             qp_status: 1000
         }
 
-        let positions = await employeeModel.getPositions()
-        res.send(positions)
+        finalResponse.positions = await employeeModel.getPositions()
+        res.send(finalResponse)
     }catch(err){
         // log error
         res.send({qp_status: 2000}) // common error status
@@ -22,16 +22,16 @@ exports.employeeListByPosition = async(req, res) => {
             qp_status: 1000
         }
 
-        let positionId = req.query.position_id;
+        let positionId = Number(req.query.position_id);
 
         if(! positionId){
             finalResponse.qp_status = 1003; // necessary field missing
-
+            res.send(finalResponse)
         }
         
-        let employeeList = await employeeModel.getListByPosition(positionId);
+        finalResponse.employeeList = await employeeModel.getListByPosition(positionId);
 
-        res.send(employeeList);
+        res.send(finalResponse);
     }catch(err){
         // log error
         res.send({qp_status: 2000})
