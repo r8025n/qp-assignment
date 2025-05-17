@@ -1,6 +1,7 @@
 'use strict';
 
 const employeeModel = require('../models/employeeModel')
+const logger = require('../../utils/logger')
 
 exports.getPositions = async(req, res) => {
     try{
@@ -11,7 +12,7 @@ exports.getPositions = async(req, res) => {
         finalResponse.positions = await employeeModel.getPositions()
         res.send(finalResponse)
     }catch(err){
-        // log error
+        logger.error({ error: err.message });
         res.send({qp_status: 2000}) // common error status
     }
 }
@@ -33,7 +34,7 @@ exports.employeeListByPosition = async(req, res) => {
 
         res.send(finalResponse);
     }catch(err){
-        // log error
+        logger.error({ error: err.message });
         res.send({qp_status: 2000})
     }
 }
