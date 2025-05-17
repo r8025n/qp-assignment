@@ -37,12 +37,36 @@ qp-assignment/
 │ ├── services/
 │ ├── views/ # Bootstrap UI
 ├── tests/
-│ ├── api.test.js
-│ └── function.test.js
+
 ├── app.js # Express app config
 ├── server.js # Server entry point (clustering supported)
 ├── .env
 ├── .env.dev
+├── package.json
+└── README.md
+
+├── src/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── views/              # Bootstrap UI
+│   ├── app.js              # Express app config
+│   └── server.js           # Server entry point
+│
+├── utils/
+│   └── logger.js
+│
+├── tests/
+│ ├── api.test.js
+│ └── function.test.js
+├── logs/
+│   ├── error.log
+│   └── combined.log
+├── .env
+├── .env.dev
+├── .env.test
+├── .env.production
 ├── package.json
 └── README.md
 ```
