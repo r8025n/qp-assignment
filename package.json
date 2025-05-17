@@ -8,7 +8,9 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "jest"
+    "test": "jest",
+    "dev": "NODE_ENV=dev node server.js",
+    "prod": "NODE_ENV=prod node server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
