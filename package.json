@@ -10,7 +10,7 @@
     "start": "nodemon server.js",
     "test": "jest",
     "dev": "NODE_ENV=dev node server.js",
-    "prod": "NODE_ENV=prod node server.js"
+    "prod": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
