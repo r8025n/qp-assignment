@@ -15,6 +15,8 @@ if (process.env.NODE_ENV) {
     dotenv.config({
         path: `${__dirname}/.env.${process.env.NODE_ENV}`
     });
+}else{
+    dotenv.config();
 }
 
 const app = express();
@@ -25,5 +27,9 @@ const app = express();
 // app.use(bodyParser.json()); // if needed
 
 app.use('', routes);
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src/views', 'index.html'));
+  });
 
 module.exports = app;
