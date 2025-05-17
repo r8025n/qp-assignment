@@ -12,8 +12,9 @@ describe('Test positions API', () => {
     test("should return a proper formatted response", async () => {
         const res = await request(app)
         .get('/employees/positions')
+        .set("Authorization",`Bearer ${jwtToken}`)
         .set('Accept', 'application/json')
-        // console.log(res.body)
+        
         expect(res.statusCode).toBe(200);
         expect(res.body).toHaveProperty('qp_status');
         expect(res.body.qp_status).toBe(1000)
@@ -27,8 +28,9 @@ describe('Test employee list by positionId API', () => {
     test("should return a proper formatted response", async () => {
         const res = await request(app)
         .get('/employees?position_id=1')
+        .set("Authorization",`Bearer ${jwtToken}`)
         .set('Accept', 'application/json')
-        // console.log(res.body)
+        
         expect(res.statusCode).toBe(200);
         expect(res.body).toHaveProperty('qp_status');
         expect(res.body.qp_status).toBe(1000)
@@ -40,8 +42,9 @@ describe('Test employee list by positionId API', () => {
       test("should return status 1003 if position_id is string", async () => {
         const res = await request(app)
         .get("/employees?position_id='1'")
+        .set("Authorization",`Bearer ${jwtToken}`)
         .set('Accept', 'application/json')
-        // console.log(res.body)
+        
         expect(res.statusCode).toBe(200);
         expect(res.body).toHaveProperty('qp_status');
         expect(res.body.qp_status).toBe(1003)
@@ -50,8 +53,9 @@ describe('Test employee list by positionId API', () => {
       test("should return status 1003 if position id missing", async () => {
         const res = await request(app)
         .get('/employees')
+        .set("Authorization",`Bearer ${jwtToken}`)
         .set('Accept', 'application/json')
-        // console.log(res.body)
+        
         expect(res.statusCode).toBe(200);
         expect(res.body).toHaveProperty('qp_status');
         expect(res.body.qp_status).toBe(1003)
@@ -62,10 +66,10 @@ describe('Test employee list by positionId API', () => {
 describe('Test JWT authorized api', () => {
     test("should be authorized if jwt is present", async () => {
         const res = await request(app)
-        .get('/employees/jwt-protected?position_id=1')
+        .get('/employees?position_id=1')
         .set("Authorization",`Bearer ${jwtToken}`)
         .set('Accept', 'application/json')
-        // console.log(res.body)
+        
         expect(res.statusCode).toBe(200);
         expect(res.body).toHaveProperty('qp_status');
         expect(res.body.qp_status).toBe(1000)
@@ -73,18 +77,18 @@ describe('Test JWT authorized api', () => {
 
       test("status code should be 401 if jwt missing", async () => {
         const res = await request(app)
-        .get('/employees/jwt-protected?position_id=1')
+        .get('/employees?position_id=1')
         .set('Accept', 'application/json')
-        // console.log(res.body)
+        
         expect(res.statusCode).toBe(401);
       });
 
       test("status code should be 403 if invalid jwt", async () => {
         const res = await request(app)
-        .get('/employees/jwt-protected?position_id=1')
+        .get('/employees?position_id=1')
         .set("Authorization",`Bearer ${jwtToken}abc`)
         .set('Accept', 'application/json')
-        // console.log(res.body)
+        
         expect(res.statusCode).toBe(403);
       });
 })
