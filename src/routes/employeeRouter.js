@@ -8,15 +8,12 @@ const router = express.Router();
 
 const baseRoute = "/employees"
 
-router.get(baseRoute + '/positions', 
+router.get(baseRoute + '/positions',
+    jwtMiddleware.verifyJWT, 
     employeeController.getPositions
 )
 
 router.get(baseRoute + '/',
-    employeeController.employeeListByPosition
-)
-
-router.get(baseRoute + '/jwt-protected',
     jwtMiddleware.verifyJWT,
     employeeController.employeeListByPosition
 )
